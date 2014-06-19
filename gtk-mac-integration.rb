@@ -8,7 +8,7 @@ class GtkMacIntegration < Formula
 
   depends_on 'pkg-config' => :build
   depends_on 'xz'
-  depends_on 'gtk+'
+  depends_on 'gtk+-quartz'
 
   patch do
     url  'http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-unhandled-exception-from-attempting-to-access-me.patch'

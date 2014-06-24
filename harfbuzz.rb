@@ -14,7 +14,7 @@ class Harfbuzz < Formula
 
   depends_on "pkg-config" => :build
   depends_on "glib"
-  depends_on "mattintosh4/homebrew-gtk-mac-integration/cairo" if build.without? "x11" => "without-x11"
+  depends_on "mattintosh4/gtk-mac-integration/cairo" if build.without? "x11" => "without-x11"
   depends_on "icu4c" => :recommended
   depends_on "freetype"
 

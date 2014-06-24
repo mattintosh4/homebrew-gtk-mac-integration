@@ -8,9 +8,9 @@ class GtkMacIntegration < Formula
 
   depends_on 'pkg-config' => :build
   depends_on 'xz'
-  depends_on 'mattintosh4/homebrew-gtk-mac-integration/cairo'  => 'without-x11'
-  depends_on 'mattintosh4/homebrew-gtk-mac-integration/pango'  => 'without-x11'
-  depends_on 'mattintosh4/homebrew-gtk-mac-integration/gtk+'   => 'without-x11'
+  depends_on 'mattintosh4/gtk-mac-integration/cairo'  => 'without-x11'
+  depends_on 'mattintosh4/gtk-mac-integration/pango'  => 'without-x11'
+  depends_on 'mattintosh4/gtk-mac-integration/gtk+'   => 'without-x11'
 
   patch do
     url  'http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-unhandled-exception-from-attempting-to-access-me.patch'

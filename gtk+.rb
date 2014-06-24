@@ -17,10 +17,10 @@ class Gtkx < Formula
   depends_on 'jpeg'
   depends_on 'libtiff'
   depends_on 'gdk-pixbuf'
-  depends_on 'mattintosh4/homebrew-gtk-mac-integration/pango' => 'without-x11'
+  depends_on 'mattintosh4/gtk-mac-integration/pango' => 'without-x11'
   depends_on 'jasper' => :optional
   depends_on 'atk'
-  depends_on 'mattintosh4/homebrew-gtk-mac-integration/cairo' => 'without-x11'
+  depends_on 'mattintosh4/gtk-mac-integration/cairo' => 'without-x11'
   depends_on :x11 => :recommended
   depends_on 'gobject-introspection'
 
@@ -34,13 +34,18 @@ class Gtkx < Formula
       --prefix=#{prefix}
       --disable-dependency-tracking
       --disable-silent-rules
-      --disable-glibtext
-      --enable-introspection=yes
-      --disable-visibility
+      --disable-glibtest
     ]
 
     if build.without? "x11"
+      args << "--enable-quartz-relocation"
+      args << "--enable-introspection=no"
       args << "--with-gdktarget=quartz"
+    else
+      args << "--enable-introspection=yes"
+      args << "--with-xinput"
+      args << "--enable-xinerama"
+      args << "--disable-visibility"
     end
 
     system "./configure", *args

@@ -17,11 +17,11 @@ class Gtkx < Formula
   depends_on 'jpeg'
   depends_on 'libtiff'
   depends_on 'gdk-pixbuf'
-  depends_on 'pango'
+  depends_on 'mattintosh4/homebrew-gtk-mac-integration/pango' => 'without-x11'
   depends_on 'jasper' => :optional
   depends_on 'atk'
-  depends_on 'cairo'
-#  depends_on :x11 => '2.3.6'
+  depends_on 'mattintosh4/homebrew-gtk-mac-integration/cairo' => 'without-x11'
+  depends_on :x11 => :recommended
   depends_on 'gobject-introspection'
 
   fails_with :llvm do
@@ -30,13 +30,20 @@ class Gtkx < Formula
   end
 
   def install
-    system "./configure", "--disable-dependency-tracking",
-                          "--disable-silent-rules",
-                          "--prefix=#{prefix}",
-                          "--disable-glibtest",
-                          "--enable-introspection=yes",
-                          "--disable-visibility",
-                          "--with-gdktarget=quartz"
+    args = %W[
+      --prefix=#{prefix}
+      --disable-dependency-tracking
+      --disable-silent-rules
+      --disable-glibtext
+      --enable-introspection=yes
+      --disable-visibility
+    ]
+
+    if build.without? "x11"
+      args << "--with-gdktarget=quartz"
+    end
+
+    system "./configure", *args
     system "make install"
   end
 end

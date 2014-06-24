@@ -8,7 +8,9 @@ class GtkMacIntegration < Formula
 
   depends_on 'pkg-config' => :build
   depends_on 'xz'
-  depends_on 'gtk+-quartz'
+  depends_on 'mattintosh4/homebrew-gtk-mac-integration/cairo'  => 'without-x11'
+  depends_on 'mattintosh4/homebrew-gtk-mac-integration/pango'  => 'without-x11'
+  depends_on 'mattintosh4/homebrew-gtk-mac-integration/gtk+'   => 'without-x11'
 
   patch do
     url  'http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-unhandled-exception-from-attempting-to-access-me.patch'
@@ -16,10 +18,14 @@ class GtkMacIntegration < Formula
   end
 
   def install
-    system "./configure", "--prefix=#{prefix}",
-                          "--disable-dependency-tracking",
-                          "--disable-silent-rules"
+    args = %W[
+      --prefix=#{prefix}
+      --disable-dependency-tracking
+      --disable-silent-rules
+      --with-gtk=gtk+-2.0
+    ]
+
+    system "./configure", *args
     system "make install"
   end
 end
-
